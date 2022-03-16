@@ -3,7 +3,7 @@ import Header from './Header.jsx';
 import Search from './Search.jsx';
 import PokedexEntryText from './PokedexEntryText.jsx';
 import testData from './testData.js';
-import PokemonImage from './PokemonImage.jsx';
+import PokemonBasicInfo from './PokemonBasicInfo.jsx';
 
 export const GlobalContext = createContext(0);
 
@@ -18,10 +18,13 @@ function App() {
       setPokemonId,
     }}>
       <div>
-        {console.log(pokemon)}
         <Header />
         <Search />
-        <PokemonImage pokemon={pokemon} forms={pokemon.forms} />
+        <PokemonBasicInfo
+          pokemon={pokemon}
+          forms={pokemon.forms}
+          id={pokemonId}
+          category={pokemonSpecies.genera[7].genus} />
         <PokedexEntryText pokedexEntry={pokemonSpecies} />
       </div>
     </GlobalContext.Provider>
