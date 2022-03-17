@@ -15,7 +15,7 @@ function Search() {
     e.preventDefault();
     axios.get('/pokedex/allpokemon')
     .then((res) => {
-      const newPokemon = res.data.results.find((pokemon) => pokemon.name.toLowerCase().includes(searchInput));
+      const newPokemon = res.data.results.find((pokemon) => pokemon.name.toLowerCase().includes(searchInput.toLowerCase()));
       if (newPokemon) {
         const newName = newPokemon.name;
         setPokemonName(newName);
@@ -33,7 +33,7 @@ function Search() {
   return (
     <HeaderWrapper>
       <form>
-        <InputBar placeholder="Search pokédex..." value={searchInput.toLowerCase()} type="Search" onChange={handleSearchInputChange} />
+        <InputBar placeholder="Search pokédex..." value={searchInput} type="Search" onChange={handleSearchInputChange} />
         <SearchButton type="submit" onClick={handleSearchSubmit}>
           Search
         </SearchButton>

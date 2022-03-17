@@ -14,11 +14,12 @@ export const BasicInfoWrapper = styled.div`
   width: 60%;
   align: center;
   margin: auto;
+  margin-top: 5px;
 `
 
 export const DexEntryWrapper = styled.div`
   width: 59%;
-  height: 225px;
+  height: 150px;
   align: center;
   margin: auto;
   border-style: solid;
@@ -86,7 +87,7 @@ export const PokemonTypes = styled.div`
 
 export const DexEntryBody = styled.div`
   padding: 10px;
-  margin: 10px;
+  margin-top: 36px;
   text-align: center;
   font-family: 'Pokemon-DP Pro', sans-serif;
   font-size: 24px;
@@ -106,7 +107,7 @@ export const SearchButton = styled.button`
   border-width: 5px;
   border-radius: 10px;
   border-color: #356ABC;
-  margin: 10px;
+  margin-left: 10px;
 `
 
 export const InputBar = styled.input`
