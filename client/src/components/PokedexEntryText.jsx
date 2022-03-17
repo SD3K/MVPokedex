@@ -1,17 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { DexEntryWrapper, DexEntryBody } from './styled/styles.js';
 
 function PokedexEntryText({ pokedexEntry }) {
 
   return (
-    <div>
-      {pokedexEntry.flavor_text_entries[0].flavor_text}
-    </div>
+    <DexEntryWrapper>
+      <DexEntryBody>
+        {pokedexEntry.flavor_text_entries[0].flavor_text}
+      </DexEntryBody>
+    </DexEntryWrapper>
   );
 }
-
-PokedexEntryText.propTypes = {
-  pokedexEntry: PropTypes.object.isRequired
-};
 
 export default PokedexEntryText;

@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { GlobalContext } from './App.jsx';
+import { HeaderWrapper, SearchButton, InputBar } from './styled/styles.js';
 
 function Search() {
-  const { setPokemonId } = useContext(GlobalContext);
+  const { setPokemonName } = useContext(GlobalContext);
   const [searchInput, setSearchInput] = useState('');
 
   const handleSearchInputChange = (e) => {
@@ -12,30 +13,32 @@ function Search() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    axios.get('/pokedex/mokemon')
+    axios.get('/pokedex/allpokemon')
     .then((res) => {
-      const newPokemon = res.data.find((pokemon) => pokemon.name.toLowerCase().includes(searchInput));
+      const newPokemon = res.data.results.find((pokemon) => pokemon.name.toLowerCase().includes(searchInput));
       if (newPokemon) {
-        const newId = newPokemon.id;
-        setPokemonId(newId);
+        const newName = newPokemon.name;
+        setPokemonName(newName);
       } else {
         window.alert('Pokémon not found');
       }
       setSearchInput('');
     })
-    .catch((er) => {
+    .catch((err) => {
       console.log(err);
     })
   }
 
 
   return (
-    <div>
-      <input placeholder="Search pokédex..." value={searchInput} type="Search" onChange={handleSearchInputChange} />
-      <button type="submit">
-        Search
-      </button>
-    </div>
+    <HeaderWrapper>
+      <form>
+        <InputBar placeholder="Search pokédex..." value={searchInput} type="Search" onChange={handleSearchInputChange} />
+        <SearchButton type="submit" onClick={handleSearchSubmit}>
+          Search
+        </SearchButton>
+      </form>
+    </HeaderWrapper>
   );
 }
 
