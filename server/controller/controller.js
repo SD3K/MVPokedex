@@ -1,11 +1,8 @@
-import axios from 'axios';
-import Pokedex from 'pokedex-promise-v2';
-const Model = require('./model/model.js');
-
-const P = new Pokedex();
+const Model = require('../model/model.js');
 
 const getPokemon = (req, res) => {
-  Model.getPokemon((err, pokemon) => {
+  const params = req.query;
+  Model.getPokemon(params, (err, pokemon) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -14,8 +11,20 @@ const getPokemon = (req, res) => {
   })
 };
 
-const getPokemonSpecies = () => {
-  Model.getPokemonSpecies((err, pokemonSpecies) => {
+const getAllPokemon = (req, res) => {
+  const params = req.query;
+  Model.getAllPokemon(params, (err, pokemon) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(pokemon);
+    }
+  })
+};
+
+const getPokemonSpecies = (req, res) => {
+  const params = req.query;
+  Model.getPokemonSpecies(params, (err, pokemonSpecies) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -26,5 +35,6 @@ const getPokemonSpecies = () => {
 
 module.exports = {
   getPokemon,
+  getAllPokemon,
   getPokemonSpecies
 }

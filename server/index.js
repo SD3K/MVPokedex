@@ -7,15 +7,15 @@ app.use(express.static('client/dist'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/pokemon/', (req, res) => {
+app.get('/pokedex/pokemon/', (req, res) => {
   Controller.getPokemon(req, res);
 });
 
-app.get('/pokemon/', (req, res) => {
-  Controller.getPokemon(req, res);
+app.get('/pokedex/allpokemon/', (req, res) => {
+  Controller.getAllPokemon(req, res);
 });
 
-app.get('/pokemon/species', (req, res) => {
+app.get('/pokedex/pokemon/species', (req, res) => {
   Controller.getPokemonSpecies(req, res);
 })
 
