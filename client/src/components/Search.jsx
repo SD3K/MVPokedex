@@ -33,7 +33,7 @@ function Search() {
   return (
     <HeaderWrapper>
       <form>
-        <InputBar placeholder="Search pokédex..." value={searchInput} type="Search" onChange={handleSearchInputChange} />
+        <InputBar placeholder="Search pokédex..." value={searchInput.toLowerCase()} type="Search" onChange={handleSearchInputChange} />
         <SearchButton type="submit" onClick={handleSearchSubmit}>
           Search
         </SearchButton>
