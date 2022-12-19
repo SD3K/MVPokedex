@@ -22,9 +22,7 @@ export const DexEntryWrapper = styled.div`
   height: 150px;
   align: center;
   margin: auto;
-  border-style: solid;
-  border-width: 5px;
-  border-color: #356ABC;
+  border: 5px solid #356ABC;
   border-radius: 20px;
   margin-top: 10px;
 `
@@ -32,9 +30,7 @@ export const DexEntryWrapper = styled.div`
 export const DexPhotoWrapper = styled.div`
   width: 250px;
   height: 250px;
-  border-style: solid;
-  border-width: 5px;
-  border-color: #356ABC;
+  border: 5px solid #356ABC;
   border-radius: 20px;
   margin-right: 5px;
 `
@@ -42,9 +38,7 @@ export const DexPhotoWrapper = styled.div`
 export const DexNameIdWrapper = styled.div`
   width: 100%;
   height: 250px;
-  border-style: solid;
-  border-width: 5px;
-  border-color: #356ABC;
+  border: 5px solid #356ABC;
   border-radius: 20px;
   margin-left: 5px;
   margin-right: 2px;

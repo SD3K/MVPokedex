@@ -1,14 +1,8 @@
 import React from 'react';
 import { DexEntryWrapper, DexEntryBody } from './styled/styles.js';
 
-function PokedexEntryText({ pokedexEntry }) {
-
-  const format = (s) => {
-    if (typeof s !== 'string') {
-      return '';
-    }
-    return s.replace('\f', '\n');
-  }
+const PokedexEntryText = ({ pokedexEntry }) => {
+  const format = s => s && s.replace('\f', '\n');
 
   return (
     <DexEntryWrapper>

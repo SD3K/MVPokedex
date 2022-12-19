@@ -7,33 +7,39 @@ function Search() {
   const { setPokemonName } = useContext(GlobalContext);
   const [searchInput, setSearchInput] = useState('');
 
-  const handleSearchInputChange = (e) => {
-    setSearchInput(e.target.value);
+  const handleSearchInputChange = (event) => {
+    setSearchInput(event.target.value);
   };
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    axios.get('/pokedex/allpokemon')
-    .then((res) => {
-      const newPokemon = res.data.results.find((pokemon) => pokemon.name.toLowerCase().includes(searchInput.toLowerCase()));
-      if (newPokemon) {
-        const newName = newPokemon.name;
-        setPokemonName(newName);
-      } else {
-        window.alert('Pokémon not found');
-      }
-      setSearchInput('');
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
 
+    axios.get('/pokedex/allpokemon')
+      .then((response) => {
+        const newPokemon = response.data.results.find((pokemon) =>
+          pokemon.name.toLowerCase().includes(searchInput.toLowerCase())
+        );
+        if (newPokemon) {
+          setPokemonName(newPokemon.name);
+        } else {
+          window.alert('Pokémon not found');
+        }
+        setSearchInput('');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   return (
     <HeaderWrapper>
       <form>
-        <InputBar placeholder="Search pokédex..." value={searchInput} type="Search" onChange={handleSearchInputChange} />
+        <InputBar
+          placeholder="Search pokédex..."
+          value={searchInput}
+          type="text"
+          onChange={handleSearchInputChange}
+        />
         <SearchButton type="submit" onClick={handleSearchSubmit}>
           Search
         </SearchButton>

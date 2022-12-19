@@ -11,19 +11,13 @@ import {
   Flex
 } from './styled/styles.js';
 
-function PokemonBasicInfo({ pokemon, name, genus }) {
-
-  function pad(n, length) {
-    var len = length - (''+n).length;
+const PokemonBasicInfo = ({ pokemon, name, genus }) => {
+  const pad = (n, length) => {
+    let len = length - (''+n).length;
     return (len > 0 ? new Array(++len).join('0') : '') + n
   }
 
-  const capitalize = (s) => {
-    if (typeof s !== 'string') {
-      return '';
-    }
-    return s.charAt(0).toUpperCase() + s.slice(1);
-  }
+  const capitalize = s => s && s.charAt(0).toUpperCase() + s.slice(1);
 
   return (
     <BasicInfoWrapper>

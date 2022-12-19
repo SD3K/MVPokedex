@@ -13,31 +13,41 @@ function App() {
   const [pokemon, setPokemon] = useState(testData.pokemon);
   const [pokemonName, setPokemonName] = useState(testData.pokemon.name);
   const [pokemonSpecies, setPokemonSpecies] = useState(testData.pokemonSpecies);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const getPokemon = () => {
+    setIsLoading(true);
     axios.get('/pokedex/pokemon/', { params: { name: pokemonName } })
-    .then(res => {
-      setPokemon(res.data);
-    })
-    .catch(err => {
-      console.log('Unable to get new pokemon, ', err);
-    });
+      .then(res => {
+        setPokemon(res.data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.log('Unable to get new pokemon, ', err);
+        setError(err);
+        setIsLoading(false);
+      });
   }
 
   const getPokemonSpecies = () => {
+    setIsLoading(true);
     axios.get('/pokedex/pokemon/species', { params: { name: pokemonName } })
-    .then(res => {
-      setPokemonSpecies(res.data);
-    })
-    .catch(err => {
-      console.log('Unable to get new pokemon species, ', err);
-    });
+      .then(res => {
+        setPokemonSpecies(res.data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.log('Unable to get new pokemon species, ', err);
+        setError(err);
+        setIsLoading(false);
+      });
   }
 
-  useEffect(() => (
-    getPokemon(),
-    getPokemonSpecies()
-  ), [pokemonName]);
+  useEffect(() => {
+    getPokemon();
+    getPokemonSpecies();
+  }, [pokemonName]);
 
   return (
     <GlobalContext.Provider value= {{
@@ -48,11 +58,19 @@ function App() {
         <GlobalFonts />
         <Header />
         <Search />
-        <PokemonBasicInfo
-          pokemon={pokemon}
-          name={pokemonName}
-          genus={pokemonSpecies.genera[7].genus} />
-        <PokedexEntryText pokedexEntry={pokemonSpecies} />
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>An error occurred: {error.message}</p>
+        ) : (
+          <>
+            <PokemonBasicInfo
+              pokemon={pokemon}
+              name={pokemonName}
+              genus={pokemonSpecies.genera[7].genus} />
+            <PokedexEntryText pokedexEntry={pokemonSpecies} />
+          </>
+        )}
       </div>
     </GlobalContext.Provider>
   );
