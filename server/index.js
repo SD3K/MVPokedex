@@ -1,23 +1,19 @@
 const express = require('express');
 const Controller = require('./controller/controller.js');
 const app = express();
-const PORT = 3000 || process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static('client/dist'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/pokedex/pokemon/', (req, res) => {
-  Controller.getPokemon(req, res);
-});
+const handleGetPokemon = (req, res) => Controller.getPokemon(req, res);
+const handleGetAllPokemon = (req, res) => Controller.getAllPokemon(req, res);
+const handleGetPokemonSpecies = (req, res) => Controller.getPokemonSpecies(req, res);
 
-app.get('/pokedex/allpokemon/', (req, res) => {
-  Controller.getAllPokemon(req, res);
-});
-
-app.get('/pokedex/pokemon/species', (req, res) => {
-  Controller.getPokemonSpecies(req, res);
-})
+app.get('/pokedex/pokemon/', handleGetPokemon);
+app.get('/pokedex/allpokemon/', handleGetAllPokemon);
+app.get('/pokedex/pokemon/species', handleGetPokemonSpecies);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
